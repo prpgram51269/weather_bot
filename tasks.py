@@ -1,8 +1,11 @@
 import asyncio
+from logger import get_logger
 from dotenv import load_dotenv
 import os
 import asyncpg
 from datetime import datetime, timedelta, timezone
+
+logger = get_logger(__name__)
 
 load_dotenv()
 
@@ -20,10 +23,10 @@ async def _async_cleanup():
             '''DELETE FROM weather_history WHERE created_at < $1''',
             one_day_ago
         )
-        print(f"✅ Очистка БД завершена. {result}")
+        logger.info("Очистка БД завершена. %s", result)
         return result
-    except Exception as e:
-        print(f' return result')
+    except Exception:
+        logger.exception("Ошибка при очистке БД")
         raise
     finally:
         await conn.close()

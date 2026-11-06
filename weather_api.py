@@ -1,6 +1,9 @@
 import httpx
 import os
 from dotenv import load_dotenv
+from logger import get_logger
+
+logger = get_logger(__name__)
 
 load_dotenv()
 
@@ -19,10 +22,14 @@ async def get_weather(city):
         response = await client.get(url, params=params)
 
         if response.status_code == 404:
+            logger.error('Город %s не найден', city)
             return 'Неверно указан город'
 
         if response.status_code != 200:
+            logger.error('Ошибка при подключении к сайту %s', response.status_code)
             return "❌ Ошибка при получении погоды. Попробуйте позже."
+
+        logger.info('Ответ получен! %s', response.status_code)
 
         data = response.json()
 

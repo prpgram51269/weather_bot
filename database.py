@@ -7,26 +7,6 @@ class Database():
 
     async def connect(self):
         self.pool = await asyncpg.create_pool(self.url)
-        await self._create_table()
-
-    async def _create_table(self):
-        async with self.pool.acquire() as conn:
-            await conn.execute('''
-                     CREATE TABLE IF NOT EXISTS users(
-                         user_id  BIGINT PRIMARY KEY,
-                         city VARCHAR(100)
-                     )
-                 ''')
-
-            await conn.execute('''
-                    CREATE TABLE IF NOT EXISTS weather_history (
-                        id SERIAL PRIMARY KEY,
-                        user_id BIGINT REFERENCES users(user_id) ON DELETE CASCADE,
-                        city VARCHAR(100),
-                        created_at TIMESTAMPTZ NOT NULL DEFAULT NOW()
-                    )
-                ''')
-
 
     async def add_users(self, user_id, city):
         async with self.pool.acquire() as conn:
