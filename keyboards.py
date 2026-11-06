@@ -1,5 +1,6 @@
 from aiogram.types import KeyboardButton, ReplyKeyboardMarkup
 
+
 def weather_kb():
     return ReplyKeyboardMarkup(
         keyboard=[

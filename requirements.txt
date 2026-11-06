@@ -1,0 +1,11 @@
+aiogram
+asyncpg
+celery
+redis
+httpx
+python-dotenv
+alembic
+psycopg[binary]
+pytest
+pytest-asyncio
+ruff

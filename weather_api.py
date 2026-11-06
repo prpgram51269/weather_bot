@@ -1,6 +1,8 @@
-import httpx
 import os
+
+import httpx
 from dotenv import load_dotenv
+
 from logger import get_logger
 
 logger = get_logger(__name__)

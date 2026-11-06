@@ -1,5 +1,6 @@
 import respx
 from httpx import Response
+
 from weather_api import get_weather
 
 FAKE_JSON = {

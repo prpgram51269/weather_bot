@@ -1,4 +1,5 @@
 from pytest_asyncio import fixture
+
 from database import Database
 
 TEST_DB_URL = "postgresql://postgres:secret@localhost:5432/weather_bot"

@@ -1,7 +1,8 @@
 from celery import Celery
 from celery.schedules import crontab
+from celery.signals import task_failure, task_postrun, task_prerun
+
 from logger import get_logger
-from celery.signals import task_failure, task_prerun, task_postrun
 
 logger = get_logger(__name__)
 

@@ -1,8 +1,10 @@
 from aiogram import types
-from db import db
-from weather_api import get_weather
 from aiogram.fsm.context import FSMContext
+
+from db import db
 from states import Weather
+from weather_api import get_weather
+
 
 # 1 кнопка
 async def city_weather(message: types.Message, state: FSMContext):

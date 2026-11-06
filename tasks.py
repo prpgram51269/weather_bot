@@ -1,9 +1,11 @@
 import asyncio
-from logger import get_logger
-from dotenv import load_dotenv
 import os
+from datetime import UTC, datetime, timedelta
+
 import asyncpg
-from datetime import datetime, timedelta, timezone
+from dotenv import load_dotenv
+
+from logger import get_logger
 
 logger = get_logger(__name__)
 
@@ -18,7 +20,7 @@ def cleanup_history():
 async def _async_cleanup():
     conn = await asyncpg.connect(DATABASE_URL)
     try:
-        one_day_ago = datetime.now(timezone.utc) - timedelta(days=1)
+        one_day_ago = datetime.now(UTC) - timedelta(days=1)
         result = await conn.execute(
             '''DELETE FROM weather_history WHERE created_at < $1''',
             one_day_ago

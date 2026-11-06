@@ -1,17 +1,15 @@
-from config import PROXY, BOT_TOKEN
-from aiogram import Dispatcher, Bot
-from aiogram.client.session.aiohttp import AiohttpSession
-from aiogram.filters import Command
 import asyncio
-from aiogram import F
-from aiogram.filters import StateFilter
 
-from handlers.start import first_message
-from middleware import RoleMiddleware
-from handlers.weather import city_weather, name_city, weather_in_city
-from states import Weather
+from aiogram import Bot, Dispatcher, F
+from aiogram.client.session.aiohttp import AiohttpSession
+from aiogram.filters import Command, StateFilter
+
+from config import BOT_TOKEN, PROXY
 from db import db
-
+from handlers.start import first_message
+from handlers.weather import city_weather, name_city, weather_in_city
+from middleware import RoleMiddleware
+from states import Weather
 
 session = AiohttpSession(proxy=PROXY)
 bot = Bot(token=BOT_TOKEN, session=session)

@@ -1,11 +1,10 @@
 from aiogram import BaseMiddleware
-from aiogram.types import Message, CallbackQuery
+from aiogram.types import CallbackQuery, Message
+
 
 class RoleMiddleware(BaseMiddleware):
     async def __call__(self, handler, event, data):
-        if isinstance(event, Message):
-            user = event.from_user
-        elif isinstance(event, CallbackQuery):
+        if isinstance(event, (Message, CallbackQuery)):
             user = event.from_user
         else:
             return await handler(event, data)
